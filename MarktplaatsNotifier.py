@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # setting options for chrome webdriver
 options = Options()
@@ -8,44 +10,59 @@ options.add_argument('--headless')  # Headless makes the browser window invisabl
 
 driver = webdriver.Chrome(options=options)
 
-try:
-    url = input("Marktplaats profiel url: ")
-    driver.get(url)
+def find_elements(elem):
 
-    # Wait until elements - Max 10 sec 
-    driver.implicitly_wait(10)  
+    title = elem.find_element(By.CSS_SELECTOR, "h3.hz-Listing-title").text or "Titel kon niet worden gevonden"
+
+    price = elem.find_element(By.CSS_SELECTOR, "p.hz-Listing-price.hz-Listing-price--mobile.hz-text-price-label").text or "Prijs kon niet worden gevonden"
+
+    bio = elem.find_element(By.CSS_SELECTOR, ".hz-Listing-description").text + "..." or "Beschrijving kon niet worden gevonden"
+
+    img_elem = elem.find_element(By.TAG_NAME, "img")
+    image = img_elem.get_attribute("data-src") or img_elem.get_attribute("src") or "Afbeelding-url niet gevonden"
+
+    date = elem.find_element(By.CSS_SELECTOR, "span.hz-Listing-date").text.strip() or "Datum kon niet worden gevonden"
+
+    location = elem.find_element(By.CSS_SELECTOR, "span.hz-Listing-location span.hz-Listing-distance-label").text.strip() or "location kon niet worden gevonden"
+
+    name = elem.find_element(By.CSS_SELECTOR, ".hz-Listing--sellerInfo span.hz-Listing-seller-name-container a span.hz-Listing-seller-name").text.strip() or "Naam kon niet worden gevonden"
+
+    return title, price, image, bio, date, location, name
+
+def get_all_listings(url):
+    driver.get(url)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul.hz-Listings")))
 
     # Search all elements on the page
     elements = driver.find_elements(By.CSS_SELECTOR, "li.hz-Listing.hz-Listing--list-item")
-    totaal = len(elements)
-    print(f"Aantal listings gevonden: {totaal}")
+    total = len(elements)
+    print(f"Aantal listings gevonden: {total}")
 
     # For every listing a make beter looking output
     for idx, elem in enumerate(elements, start=1):
-        # Titel
-        titel = elem.find_element(By.CSS_SELECTOR, "h3.hz-Listing-title").text
-        prijs = elem.find_element(By.CSS_SELECTOR, ".hz-Listing-price--desktop").text
-        beschrijving = elem.find_element(By.CSS_SELECTOR, ".hz-Listing-description").text
+        title, price, image, bio, date, location, name = find_elements(elem)
+        print(f"\nListing {idx}/{total}:")
+        print(f"    Titel       : {title}")
+        print(f"    Prijs       : {price}")
+        print(f"    Afbeelding  : {image}")
+        print(f"    Beschrijving: {bio}")
+        print(f"    Datum       : {date}")
+        print(f"    Locatie     : {location}")
+        print(f"    Verkoper    : {name}")
 
-        #if it can find date / location add that other wise "onbekend"
+def main():
+    while True:
         try:
-            datum = elem.find_element(By.CSS_SELECTOR, ".hz-Listing-date--desktop").text
-        except:
-            datum = "Onbekend"
-        try:
-            locatie = elem.find_element(By.CSS_SELECTOR, ".hz-Listing-location .hz-Listing-distance-label").text
-        except:
-            locatie = "Onbekend"
+            url = input("Marktplaats profiel url: ")
+            get_all_listings(url)
+            driver.get(url)
 
-        print(f"\nListing {idx}/{totaal}:")
-        print(f"    Titel       : {titel}")
-        print(f"    Prijs       : {prijs}")
-        print(f"    Beschrijving: {beschrijving}")
-        print(f"    Datum       : {datum}")
-        print(f"    Locatie     : {locatie}")
 
-except Exception as e:
-    print(f"Root Error: {e}")
+        except Exception as e:
+            print(f"Root Error: {e}")
 
-finally:
-    driver.quit()
+        finally:
+            driver.quit()
+
+if __name__ == "__main__":
+    main()

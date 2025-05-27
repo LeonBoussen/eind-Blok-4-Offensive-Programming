@@ -1,6 +1,7 @@
 import os
 import time
 import StockMarket
+import MarktplaatsNotifier
 
 
 art = ['''
@@ -88,9 +89,7 @@ def main():
             elif u_i == 3:
                 StockMarket.main()
             elif u_i == 4:
-                print("Marktplaats Notifier is nog in ontwikkeling.")
-                time.sleep(2)
-                main()
+                MarktplaatsNotifier.main()
             elif u_i == 5:
                 play_art()
             elif u_i == 6:
