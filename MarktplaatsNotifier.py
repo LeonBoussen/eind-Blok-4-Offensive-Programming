@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -50,12 +51,23 @@ def get_all_listings(url):
         print(f"    Locatie     : {location}")
         print(f"    Verkoper    : {name}")
 
+
 def main():
     while True:
         try:
+            checker_delay = int(input("Hoe vaak wilt u controleren op nieuwe producten? (in seconden): "))
             url = input("Marktplaats profiel url: ")
             get_all_listings(url)
             driver.get(url)
+            while True:
+                elemts = get_all_listings(url)
+                time.sleep(checker_delay)
+                new_elem = get_all_listings(url)
+                if elemts != new_elem:
+                    print("Nieuwe listings gevonden of bestaande listings zijn gewijzigd!")
+                    get_all_listings(url)
+                else:
+                    print("Geen nieuwe listings gevonden.")
 
 
         except Exception as e:
