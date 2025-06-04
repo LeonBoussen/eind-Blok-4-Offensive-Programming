@@ -69,9 +69,9 @@ def set_title(title):
 def main():
     while True:
         try:
-            set_title("Mango Suite ")
+            set_title("Mango Suite")
             clear()
-            play_art()
+            #play_art()
             set_title("Mango Suite v1.0")
             print("1. Sorteerautomatisatie\n2. File Checker\n3. StockMarket Notifier\n4. Marktplaats notifier\n5. play antimation ;P\n6. Exit")
             u_i = int(input("What Option do you choose?\nChoice: "))
