@@ -4,9 +4,10 @@ import re
 import openpyxl
 
 #strip takes away quotes and spaces from the input
-file_path = input("Enter the path to the file you want to check: ").strip().strip('"').strip("'")
-#the line below is temporarily for debugging purposes
-print(f"Received file path: {repr(file_path)}")
+file_path = input("Enter the path to the file you want to check: ").strip('&').strip('"').strip("'")
+#line below is temorary and overwrites the input for testing purposes, can be commented and uncommented
+#file_path = "C:\Users\gijsd\OneDrive\Laptop Desktop\eind-Blok-4-Offensive-Programming\Fake_Contact_List.xlsx"
+print(f"Checking file: {file_path}")
 
 def check_file(file_path=file_path):
     if not os.path.exists(file_path):
@@ -61,7 +62,7 @@ def find_emails(content):
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
     return re.findall(email_pattern, content)
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     try:
         check_file()
     except Exception as e:
