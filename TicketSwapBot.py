@@ -95,7 +95,8 @@ def checkTicket(link):
         
 
 
-def search():
+def main():
+    global proxyList, proxyForGet
     url = start()
     while True:
         try:
@@ -110,4 +111,6 @@ def search():
             errorLog(f"Error occured at {time.now()}!\nError info:\nProxy: {proxyForGet}\n{e}\n\n--------------------------------")
         finally:
             print(Fore.YELLOW + "Loop done!")
+
+    input("Press Enter to exit...")  # Wait for user input before closing
 

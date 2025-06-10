@@ -83,16 +83,21 @@ def main():
                 main()
             elif u_i == 1:
                 sa.main()
+                pause = input("Press Enter to continue...")
             elif u_i == 2:
                 fc.main()
+                pause = input("Press Enter to continue...")
             elif u_i == 3:
                 dw.main()
+                pause = input("Press Enter to continue...")
             elif u_i == 4:
                 StockMarket.main()
+                pause = input("Press Enter to continue...") 
             elif u_i == 5:
                 MarktplaatsNotifier.main()
+                pause = input("Press Enter to continue...")
             elif u_i == 6:
-                tsb.search()
+                tsb.main()
             elif u_i == 7:
                 play_art()    
             elif u_i == 8:
