@@ -92,7 +92,7 @@ def main():
             elif u_i == 5:
                 MarktplaatsNotifier.main()
             elif u_i == 6:
-                tsb.main()
+                tsb.search()
             elif u_i == 7:
                 play_art()    
             elif u_i == 8:

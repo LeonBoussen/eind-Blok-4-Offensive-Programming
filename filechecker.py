@@ -95,11 +95,13 @@ def main():
     found_any_phone = False
     found_any_email = False
 
+    check_file(file_path)
+
 
 # Ensure correct main execution
 if __name__ == "__main__":
     try:
-        check_file(file_path)
+        main()
     except Exception as e:
         print(f"An error occurred: {e}")
         print("Please ensure the file path is correct and the file is accessible.")
