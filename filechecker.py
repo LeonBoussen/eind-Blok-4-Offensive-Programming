@@ -96,12 +96,13 @@ def main():
     found_any_email = False
 
     check_file(file_path)
-
+    i = input("Press Enter to exit...")
 
 # Ensure correct main execution
 if __name__ == "__main__":
     try:
         main()
+        
     except Exception as e:
         print(f"An error occurred: {e}")
         print("Please ensure the file path is correct and the file is accessible.")
