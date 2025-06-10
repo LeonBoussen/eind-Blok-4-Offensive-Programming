@@ -4,15 +4,7 @@ import re
 import openpyxl
 from docx import Document
 
-#strip takes away quotes and spaces from the input
-file_path = input("Enter the path to the file you want to check: ").strip('&').strip('"').strip("'")
-file_path = os.path.normpath(file_path)
-
-print(f"Checking file: {file_path}")
-
-#Wordt gebruikt om te controleren of er een telefoonnummer of email is gevonden
-found_any_phone = False
-found_any_email = False
+file_path = ""
 
 #leest het bestand uit, kijkt eerst naar bestand type
 def check_file(file_path=file_path):
@@ -89,6 +81,20 @@ def find_phone_numbers(content):
 def find_emails(content):
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
     return re.findall(email_pattern, content)
+
+def main():
+    global file_path
+
+    #strip takes away quotes and spaces from the input
+    file_path = input("Enter the path to the file you want to check: ").strip('&').strip('"').strip("'")
+    file_path = os.path.normpath(file_path)
+
+    print(f"Checking file: {file_path}")
+
+    #Wordt gebruikt om te controleren of er een telefoonnummer of email is gevonden
+    found_any_phone = False
+    found_any_email = False
+
 
 # Ensure correct main execution
 if __name__ == "__main__":
