@@ -93,9 +93,10 @@ def checkTicket(link):
         for ticket in ticketlinks:
             print(cGreen + f"Ticket link: {ticket}")
         
-url = start()
+
 
 def search():
+    url = start()
     while True:
         try:
             while len(proxyList) > 1:

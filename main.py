@@ -3,6 +3,8 @@ import time
 import StockMarket
 import MarktplaatsNotifier
 import TicketSwapBot as tsb
+import filechecker as fc
+import Documentwriter as dw
 
 art = ['''
    _______________                        |*\_/*|________
@@ -79,13 +81,9 @@ def main():
                 print("Invalid choice, please try again.")
                 main()
             elif u_i == 1:
-                print("Sorteerautomatisatie is nog in ontwikkeling.")
-                time.sleep(2)
-                main()
+                dw.main()
             elif u_i == 2:
-                print("File Checker is nog in ontwikkeling.")
-                time.sleep(2)
-                main()
+                fc.main()
             elif u_i == 3:
                 StockMarket.main()
             elif u_i == 4:
