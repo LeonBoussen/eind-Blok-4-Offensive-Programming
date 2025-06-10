@@ -2,7 +2,7 @@ import os
 import time
 import StockMarket
 import MarktplaatsNotifier
-
+import TicketSwapBot as tsb
 
 art = ['''
    _______________                        |*\_/*|________
@@ -71,9 +71,9 @@ def main():
         try:
             set_title("Mango Suite")
             clear()
-            #play_art()
+            play_art()
             set_title("Mango Suite v1.0")
-            print("1. Sorteerautomatisatie\n2. File Checker\n3. StockMarket Notifier\n4. Marktplaats notifier\n5. play antimation ;P\n6. Exit")
+            print("1. Sorteerautomatisatie\n2. File Checker\n3. StockMarket Notifier\n4. Marktplaats notifier\n5. TicketSwapBot\n6. Play Animation ;P\n7. Exit")
             u_i = int(input("What Option do you choose?\nChoice: "))
             if u_i <= 0 or u_i > 5:
                 print("Invalid choice, please try again.")
@@ -91,12 +91,12 @@ def main():
             elif u_i == 4:
                 MarktplaatsNotifier.main()
             elif u_i == 5:
-                play_art()
+                tsb.search()
             elif u_i == 6:
+                play_art()
+            elif u_i == 7:
                 print("Exiting...")
-                time.sleep(1)
-                clear()
-                exit()
+                break
         except Exception as e:
             print(f"An error occurred in the first try in mains while loop: {e}")
             time.sleep(2)
