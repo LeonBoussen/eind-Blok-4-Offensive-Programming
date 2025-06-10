@@ -5,6 +5,7 @@ import MarktplaatsNotifier
 import TicketSwapBot as tsb
 import filechecker as fc
 import Documentwriter as dw
+import Sorteerautomatisatie as sa
 
 art = ['''
    _______________                        |*\_/*|________
@@ -75,24 +76,26 @@ def main():
             clear()
             play_art()
             set_title("Mango Suite v1.0")
-            print("1. Sorteerautomatisatie\n2. File Checker\n3. StockMarket Notifier\n4. Marktplaats notifier\n5. TicketSwapBot\n6. Play Animation ;P\n7. Exit")
+            print("1. Sorteerautomatisatie\n2. File Checker\n3. Documentwriter\n4. StockMarket Notifier\n5. Marktplaats notifier\n6. TicketSwapBot\n7. Play Animation ;P\n8. Exit")
             u_i = int(input("What Option do you choose?\nChoice: "))
             if u_i <= 0 or u_i > 5:
                 print("Invalid choice, please try again.")
                 main()
             elif u_i == 1:
-                dw.main()
+                sa.main()
             elif u_i == 2:
                 fc.main()
             elif u_i == 3:
-                StockMarket.main()
+                dw.main()
             elif u_i == 4:
-                MarktplaatsNotifier.main()
+                StockMarket.main()
             elif u_i == 5:
-                tsb.search()
+                MarktplaatsNotifier.main()
             elif u_i == 6:
-                play_art()
+                tsb.main()
             elif u_i == 7:
+                play_art()    
+            elif u_i == 8:
                 print("Exiting...")
                 break
         except Exception as e:
