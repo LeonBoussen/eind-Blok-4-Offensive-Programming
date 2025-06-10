@@ -80,6 +80,7 @@ def main():
             u_i = int(input("What Option do you choose?\nChoice: "))
             if u_i <= 0 or u_i > 5:
                 print("Invalid choice, please try again.")
+                pause = input("Press Enter to continue...")
                 main()
             elif u_i == 1:
                 sa.main()
@@ -98,8 +99,10 @@ def main():
                 pause = input("Press Enter to continue...")
             elif u_i == 6:
                 tsb.main()
+                pause = input("Press Enter to continue...")
             elif u_i == 7:
-                play_art()    
+                play_art()  
+                pause = input("Press Enter to continue...")  
             elif u_i == 8:
                 print("Exiting...")
                 break
